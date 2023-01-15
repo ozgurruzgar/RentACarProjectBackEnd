@@ -1,10 +1,10 @@
 ﻿using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace DataAccess.Concrete.InMemory
 {
@@ -44,6 +44,11 @@ namespace DataAccess.Concrete.InMemory
         public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
             return _cars.ToList();
+        }
+
+        public List<CarDetailDto> GetCarDetail()
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(Car entity)
