@@ -19,5 +19,11 @@ namespace Business.Contants
         public static string ColorAdded="Renk Eklendi.";
         public static string BrandIdBigFromZero="Brand Id'si 0'dan büyük olmalı.";
         public static string ColorIdBigFromZero = "Color Id'si 0'dan büyük olmalı.";
+        public static string CustomerListed="Müşteriler Listelendi";
+        public static string BrandListed="Markalar Listelendi.";
+        public static string CarListed="Arabalar Listelendi.";
+        public static string ColorListed="Renkler Listelendi.";
+        public static string RentalListed="Kiralamalar Listelendi";
+        public static string UserListed="Kullanıcılar Listelendi.";
     }
 }
