@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Contants;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utitlities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -22,30 +24,24 @@ namespace Business.Concrete
 
         public IResult Add(Car car)
         {
-            if (car.Model.Length >= 2 && car.DailyPrice > 0)
-            {
-                _carDal.Add(car);
-                return new SuccessResult(Messages.CarAdded);
-            }
-            else
-            {
-                return new ErrorResult(Messages.CarNameInValid);
-            }
+            ValidationTool.Validate(new CarValidation(), car);
+            _carDal.Add(car);
+            return new SuccessResult(Messages.CarAdded);
         }
 
         public IDataResult<List<Car>> GetAll()
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.CarListed);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarListed);
         }
 
         public IDataResult<List<Car>> GetAllByDailyPrice(short min, short max)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c=>c.DailyPrice >=min && c.DailyPrice <= max));
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max));
         }
 
         public IDataResult<List<Car>> GetByBrandId(int BrandId)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c=>c.BrandId == BrandId).ToList());
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == BrandId).ToList());
         }
 
         public IDataResult<List<Car>> GetByColorId(int ColorId)
@@ -55,7 +51,7 @@ namespace Business.Concrete
 
         public IDataResult<Car> GetById(int CarId)
         {
-            return new SuccessDataResult<Car>(_carDal.Get(c=>c.CarId == CarId));
+            return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == CarId));
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()

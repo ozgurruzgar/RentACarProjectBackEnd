@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Contants;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utitlities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -20,25 +22,19 @@ namespace Business.Concrete
 
         public IResult Add(User user)
         {
-            if (user.FirstName.Length >= 2 && user.LastName.Length >= 2 && user.UserId>0 && user.Password.Length>=2)
-            {
-                _userDal.Add(user);
-                return new SuccessResult(Messages.UserAdded);
-            }
-            else
-            {
-                return new ErrorResult(Messages.UserFNameLNameOrPassword);
-            }
+            ValidationTool.Validate(new UserValidation(),user);
+            _userDal.Add(user);
+            return new SuccessResult(Messages.UserAdded);
         }
 
         public IDataResult<List<User>> GetAll()
         {
-            return new SuccessDataResult<List<User>>(_userDal.GetAll(),Messages.UserListed);
+            return new SuccessDataResult<List<User>>(_userDal.GetAll(), Messages.UserListed);
         }
 
         public IDataResult<User> GetById(int UserId)
         {
-            return new SuccessDataResult<User>(_userDal.Get(u=>u.UserId == UserId));
+            return new SuccessDataResult<User>(_userDal.Get(u => u.UserId == UserId));
         }
     }
 }
