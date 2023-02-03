@@ -7,7 +7,7 @@
 <h5 align="left">✔️Added CRUD Operations with Entity Framework</h5>
 <h5 align="left">✔️Added Car Detail İnformations(CarDetailDTO)</h5>
 <h5 align="left">✔️All objects has CRUD Operaitons also In Memory also Entity Framework</h5>
-<h5 align="left">✔️Camp Of Raise Of The Software Developer Day 11 Homework 1 Finished</h5>
+<h5 align="left">✔️Camp Of Raise Of The Software Developer Day 12 All Homeworks Finished</h5>
 
 <h2 align="center">ScreenShots In Postman For Day 11 First Homework</h2>
 
