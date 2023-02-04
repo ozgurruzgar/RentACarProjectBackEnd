@@ -16,6 +16,7 @@ namespace DataAccess.Concrete.EntityFramework
         {
             modelBuilder.Entity<Customer>().HasKey(c=>c.UserId);
         }
+
         public DbSet<Car> Cars { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Color> Colors { get; set; }

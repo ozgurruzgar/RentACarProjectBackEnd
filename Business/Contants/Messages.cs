@@ -25,5 +25,6 @@ namespace Business.Contants
         public static string ColorListed="Renkler Listelendi.";
         public static string RentalListed="Kiralamalar Listelendi";
         public static string UserListed="Kullanıcılar Listelendi.";
+        public static string CarImageAdded="Yeni Araç Resmi Eklendi.";
     }
 }
