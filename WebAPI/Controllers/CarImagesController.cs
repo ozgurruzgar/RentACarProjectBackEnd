@@ -78,7 +78,6 @@ namespace WebAPI.Controllers
         [HttpPost("delete")]
         public IActionResult Delete([FromForm(Name = ("Id"))] int Id)
         {
-
             var carImage = _carImageService.GetByImageId(Id).Data;
 
             var result = _carImageService.Delete(carImage);

@@ -1,5 +1,5 @@
 ﻿using Core.Utitlities.Results;
-using Entities.Concrete;
+using Core.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,5 +11,6 @@ namespace Business.Abstract
         IDataResult<List<User>> GetAll();
         IDataResult<User> GetById(int UserId);
         IResult Add(User user);
+        List<OperationClaim> GetClaims(User user);
     }
 }
