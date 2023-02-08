@@ -27,9 +27,32 @@ namespace Core.Utitlities.Security.JWT
             _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration);
             var securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey);
             var signingCredentials = SigningCredencialsHelper.CreateSigningCredentials(securityKey);
+            var jwt = CreateJwtSecurityToken(_tokenOptions, user, signingCredentials, operationClaims);
+            var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+            var token = jwtSecurityTokenHandler.WriteToken(jwt);
+
+            return new AccessToken
+            {
+                Token = token,
+                Expiration = _accessTokenExpiration
+            };
         }
 
-        public JwtSecurityToken CreateSecurityToken(TokenOptions tokenOptions, User user, SigningCredentials signingCredencials, List<OperationClaim> operationClaims)
+        public JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, User user,
+    SigningCredentials signingCredentials, List<OperationClaim> operationClaims)
+        {
+            var jwt = new JwtSecurityToken(
+                issuer: tokenOptions.Issuer,
+                audience: tokenOptions.Audience,
+                expires: _accessTokenExpiration,
+                notBefore: DateTime.Now,
+                claims: SetClaims(user, operationClaims),
+                signingCredentials: signingCredentials
+            );
+            return jwt;
+        }
+
+        public JwtSecurityToken CreateSecurityToken(TokenOptions tokenOptions, User user, SigningCredentials signingCredentials, List<OperationClaim> operationClaims)
         {
             var jwt = new JwtSecurityToken(
                  issuer: tokenOptions.Issuer,
@@ -37,7 +60,7 @@ namespace Core.Utitlities.Security.JWT
                  expires: _accessTokenExpiration,
                  notBefore: DateTime.Now,
                  claims: SetClaims(user, operationClaims),
-                 signingCredentials: SigningCredentials
+                 signingCredentials: signingCredentials
                );
             return jwt;
         }
