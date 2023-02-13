@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Core.Utitlities.IoC
 {
-    public class ServiceTool
+    public static class ServiceTool
     {
         public static IServiceProvider ServiceProvider { get; private set; }
-
+        //Injectionları oluşturabilmemize yarıyor.
         public static IServiceCollection Create(IServiceCollection services)
         {
             ServiceProvider = services.BuildServiceProvider();

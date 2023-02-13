@@ -52,7 +52,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-
+        //Burda fromform name= "Image" ifadesi bizim postmanden dosyayı eklerken Body kısmındaki form-data'dan Image adıyla dosya atmamıza yarıyor. Yani Postmande Image yazıp tikleyip dosyamızı seçip atıyoruz.
         [HttpPost("add")]
         public IActionResult Add([FromForm(Name = ("Image"))] IFormFile file, [FromForm] CarImage carImage)
         {

@@ -26,9 +26,9 @@ namespace WebAPI
             {
                 builder.RegisterModule(new AutofacBusinessModule());
             })
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            });
     }
 }

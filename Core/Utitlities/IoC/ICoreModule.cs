@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.DependencyResolves
+namespace Core.Utitlities.IoC
 {
     public interface ICoreModule
     {

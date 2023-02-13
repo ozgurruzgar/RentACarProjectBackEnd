@@ -7,6 +7,7 @@ using Core.Utitlities.Interceptors;
 using Core.Utitlities.Security.JWT;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;

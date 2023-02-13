@@ -9,6 +9,7 @@ namespace Business.Abstract
 {
     public interface ICarImagesService
     {
+        //IFormFile Http istekleri dosya gönderebilme imkanı sağlayan yapıdır.
         IDataResult<List<CarImage>> GetAll();
         IDataResult<List<CarImage>> GetByCarId(int carId);
         IDataResult<CarImage> GetByImageId(int id);
