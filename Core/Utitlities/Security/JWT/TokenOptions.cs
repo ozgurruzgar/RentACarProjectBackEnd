@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Core.Utitlities.Security.JWT
+﻿namespace Core.Utitlities.Security.JWT
 {
     public class TokenOptions
     {

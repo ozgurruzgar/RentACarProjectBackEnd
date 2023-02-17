@@ -12,7 +12,7 @@ namespace ConsoleUI
         {
             // CreateCarAndList();
             // CreateCustomerAndList();
-            CreatRentalAndList();
+           // CreatRentalAndList();
 
         }
         private static void CreatRentalAndList()

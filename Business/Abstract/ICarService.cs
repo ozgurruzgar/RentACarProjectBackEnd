@@ -1,4 +1,4 @@
-﻿using Core.Utitlities.Results;
+﻿    using Core.Utitlities.Results;
 using Entities.Concrete;
 using Entities.DTOs;
 using System;
@@ -17,5 +17,6 @@ namespace Business.Abstract
         IDataResult<List<CarDetailDto>> GetCarDetails();
         IDataResult<Car> GetById(int CarId);
         IResult Add(Car car);
+        IResult AddTransactionalTest(Car car);
     }
 }

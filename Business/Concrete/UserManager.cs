@@ -4,10 +4,13 @@ using Business.ValidationRules.FluentValidation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utitlities.Results;
 using DataAccess.Abstract;
-using Core.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+using Core.Entities.Concrete;
+using FluentValidation;
+using Core.Aspects.Autofac.Validation;
 
 namespace Business.Concrete
 {
@@ -22,7 +25,6 @@ namespace Business.Concrete
 
         public IResult Add(User user)
         {
-            ValidationTool.Validate(new UserValidation(),user);
             _userDal.Add(user);
             return new SuccessResult(Messages.UserAdded);
         }
@@ -37,14 +39,14 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(_userDal.Get(u => u.Id == UserId));
         }
 
-        public User GetByMail(string email)
+        public IDataResult<User> GetByUserMail(string email)
         {
-            return _userDal.Get(u => u.Email == email);
+            return new SuccessDataResult<User>(_userDal.GetAll(u => u.Email == email).FirstOrDefault());
         }
 
-        public List<OperationClaim> GetClaims(User user)
+        public IDataResult<List<OperationClaim>> GetClaims(User user)
         {
-           return _userDal.GetClaims(user);
+            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
         }
     }
 }

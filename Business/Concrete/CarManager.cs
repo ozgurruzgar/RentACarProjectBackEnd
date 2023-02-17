@@ -1,5 +1,5 @@
 ﻿using Business.Abstract;
-using Business.BusinessAspect.Autofac;
+using Business.BusinessAspects.Autofac;
 using Business.Contants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace Business.Concrete
 {
@@ -26,19 +27,30 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-        [ValidationAspect(typeof(CarValidation))]
+        //[ValidationAspect(typeof(CarValidation))]
         public IResult Add(Car car)
         {
-            ValidationTool.Validate(new CarValidation(), car);
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
         }
-       [SecuredOperation("admin")] //throw "authorization denied." exception.
-       //[CacheRemoveAspect("Get")] 
-       //[PerformanceAspect(10)] throw "was null." exception
-       //[TransactionScopeAspect] 
+        //[TransactionScopeAspect]
+        public IResult AddTransactionalTest(Car car)
+        {
+            Add(car);
+            if(car.ModelYear<2000)
+            {
+                throw new Exception("");
+            }
+            Add(car);
+            return null;
+        }
+        //[SecuredOperation("admin")]
+        //[CacheAspect] 
+        //[CacheRemoveAspect("ICarService.GetById")]
+        [PerformanceAspect(5)] 
         public IDataResult<List<Car>> GetAll()
         {
+            Thread.Sleep(5000);
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarListed);
         }
 
@@ -56,7 +68,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == ColorId).ToList());
         }
-
+        [CacheAspect]
         public IDataResult<Car> GetById(int CarId)
         {
             return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == CarId));

@@ -1,12 +1,15 @@
-﻿using Castle.DynamicProxy;
+﻿using Business.Contants;
+using Castle.DynamicProxy;
 using Core.Extensions;
 using Core.Utitlities.Interceptors;
 using Core.Utitlities.IoC;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Http;
 using System;
-using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Business.BusinessAspect.Autofac
+namespace Business.BusinessAspects.Autofac
 {
     public class SecuredOperation : MethodInterception
     {
@@ -15,8 +18,9 @@ namespace Business.BusinessAspect.Autofac
 
         public SecuredOperation(string roles)
         {
-            _roles = roles.Split(',');//Stringleri ayırıp array haline getiriyor.
-            _httpContextAccessor = ServiceTool.ServiceProvider.GetService<IHttpContextAccessor>();//Autofacta veya WebApide yaptığımız injection değerlerini alıcak.
+            _roles = roles.Split(',');
+            _httpContextAccessor = ServiceTool.ServiceProvider.GetService<IHttpContextAccessor>();
+
         }
 
         protected override void OnBefore(IInvocation invocation)
@@ -29,7 +33,7 @@ namespace Business.BusinessAspect.Autofac
                     return;
                 }
             }
-            throw new Exception("Yetkiniz Yoktur..");
+            throw new Exception("Yetkiniz yok.");
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Business.Abstract;
-using Business.Contants;
 using Core.Entities.Concrete;
 using Core.Utitlities.Results;
 using Core.Utitlities.Security.Hashing;
@@ -36,30 +35,30 @@ namespace Business.Concrete
                 Status = true
             };
             _userService.Add(user);
-            return new SuccessDataResult<User>(user,"Kullanıcı Başarıyla Kayıt Oldu.");
+            return new SuccessDataResult<User>(user, "Kayıt Olundu.");
         }
 
         public IDataResult<User> Login(UserForLoginDto userForLoginDto)
         {
-            var userToCheck = _userService.GetByMail(userForLoginDto.Email);
+            var userToCheck = _userService.GetByUserMail(userForLoginDto.Email);
             if (userToCheck == null)
             {
                 return new ErrorDataResult<User>("Kullanıcı Bulunamadı.");
             }
 
-            if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, userToCheck.PasswordHash, userToCheck.PasswordSalt))
+            if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, userToCheck.Data.PasswordHash, userToCheck.Data.PasswordSalt))
             {
                 return new ErrorDataResult<User>("Şifre Hatalı.");
             }
 
-            return new SuccessDataResult<User>(userToCheck,"Kullanıcı Başarıyla Giriş Yaptı.");
+            return new SuccessDataResult<User>(userToCheck.Data, "Giriş Yapıldı.");
         }
 
         public IResult UserExists(string email)
         {
-            if (_userService.GetByMail(email) != null)
+            if (_userService.GetByUserMail(email) != null)
             {
-                return new ErrorResult("Bu Kullanıcı Zaten Sistemde Mevcut.");
+                return new ErrorResult("Bu Kullanıcı Zaten Mevcut.");
             }
             return new SuccessResult();
         }
@@ -67,9 +66,8 @@ namespace Business.Concrete
         public IDataResult<AccessToken> CreateAccessToken(User user)
         {
             var claims = _userService.GetClaims(user);
-            var accessToken = _tokenHelper.CreateToken(user, claims);
-            return new SuccessDataResult<AccessToken>(accessToken,"Giriş Jetonu Üretildi.");
+            var accessToken = _tokenHelper.CreateToken(user, claims.Data);
+            return new SuccessDataResult<AccessToken>(accessToken, "Giriş Jetonu Üretildi.");
         }
-
     }
 }

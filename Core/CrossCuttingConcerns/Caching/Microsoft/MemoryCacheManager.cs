@@ -1,11 +1,11 @@
 ﻿using Core.Utitlities.IoC;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Linq;
 
 namespace Core.CrossCuttingConcerns.Caching.Microsoft
 {
@@ -18,7 +18,7 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft
         }
         public void Add(string key, object value, int duration)
         {
-            _memoryCache.Set(key, value, TimeSpan.FromMinutes(duration));
+            _memoryCache.Set(key, value, TimeSpan.FromMinutes(duration));//TimeSpan Zaman Aralığı
         }
 
         public T Get<T>(string key)
@@ -33,7 +33,7 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft
 
         public bool IsAdd(string key)
         {
-            return _memoryCache.TryGetValue(key, out _);
+            return _memoryCache.TryGetValue(key,out _);
         }
 
         public void Remove(string key)

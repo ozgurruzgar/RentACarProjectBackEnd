@@ -21,6 +21,11 @@ namespace DataAccess.Concrete.EntityFramework
             modelBuilder.Entity<OperationClaim>().Property(o => o.Id).HasColumnName("Id");
             modelBuilder.Entity<OperationClaim>().Property(o => o.Name).HasColumnName("Name");
 
+            modelBuilder.Entity<UserOperationClaim>().ToTable("UserOperationClaims");
+            modelBuilder.Entity<UserOperationClaim>().Property(o => o.Id).HasColumnName("Id");
+            modelBuilder.Entity<UserOperationClaim>().Property(o => o.UserId).HasColumnName("UserId");
+            modelBuilder.Entity<UserOperationClaim>().Property(o => o.OperationClaimId).HasColumnName("OperationClaimId");
+
             modelBuilder.Entity<User>().ToTable("Users");
             modelBuilder.Entity<User>().Property(o => o.Id).HasColumnName("UserId");
             modelBuilder.Entity<User>().Property(o => o.FirstName).HasColumnName("FirstName");
@@ -34,11 +39,11 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Car> Cars { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Color> Colors { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<OperationClaim> OperationClaims { get; set; }
-        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Rental> Rentals { get; set; }
         public DbSet<CarImage> CarImages { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
     }
 }

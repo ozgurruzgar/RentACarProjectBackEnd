@@ -33,14 +33,14 @@ namespace Business.DependencyResolves.Autofac
             builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
             builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
 
-            builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance();
-            builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
-
             builder.RegisterType<RentalManager>().As<IRentalService>().SingleInstance();
             builder.RegisterType<EfRentalDal>().As<IRentalDal>().SingleInstance();
 
             builder.RegisterType<CarImageManager>().As<ICarImagesService>().SingleInstance();
             builder.RegisterType<EfCarImageDal>().As<ICarImageDal>().SingleInstance();
+
+            builder.RegisterType<AuthManager>().As<IAuthService>();
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
