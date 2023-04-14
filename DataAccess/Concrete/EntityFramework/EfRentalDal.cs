@@ -26,7 +26,7 @@ namespace DataAccess.Concrete.EntityFramework
                              on car.BrandId equals b.BrandId
                              join color in context.Colors
                              on car.ColorId equals color.ColorId
-                             select new RentalDetailDto { CarName = car.Model, CustomerFirstName = u.FirstName, CustomerLastName = u.LastName, Description = car.Description, ModelYear = car.ModelYear.ToString(), RentDate = r.RentDate, ReturnDate = r.ReturnDate, CarBrandName = b.BrandName, CarColorName = color.ColorName };
+                             select new RentalDetailDto { CarName = car.Model, CustomerFullName = u.FirstName +" "+ u.LastName, Description = car.Description, ModelYear = car.ModelYear.ToString(), RentDate = r.RentDate, ReturnDate = r.ReturnDate, CarBrandName = b.BrandName, CarColorName = color.ColorName };
                 return result.ToList();
             }
         }

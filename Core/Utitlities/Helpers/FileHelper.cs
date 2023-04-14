@@ -41,7 +41,7 @@ namespace Core.Utitlities.Helpers
 
         private static string NewPath(string file)
         {
-            string path = Environment.CurrentDirectory + @"\wwwroot\Uploads\images"; //Burda yeni dizin =  mevcuttaki dizin + @"\wwwroot\Uploads\images" demiş olduk. Biraz daha türkçeleştirirsem burası WebAPI katmanında wwwroot klasörünün içinde Uplaods klasöründe Images klasörü oluşturur ve resimlerimiz orda kaydolur. 
+            string path = Environment.CurrentDirectory + @"\wwwroot\Uploads\Images"; //Burda yeni dizin =  mevcuttaki dizin + @"\wwwroot\Uploads\images" demiş olduk. Biraz daha türkçeleştirirsem burası WebAPI katmanında wwwroot klasörünün içinde Uplaods klasöründe Images klasörü oluşturur ve resimlerimiz orda kaydolur. 
 
             string result = $@"{path}\{file}";
             return result;

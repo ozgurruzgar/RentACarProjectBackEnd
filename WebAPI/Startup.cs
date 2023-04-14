@@ -37,6 +37,7 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddCors();
 
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
@@ -69,6 +70,8 @@ namespace WebAPI
             }
             //Burasý Middleware Sýrayla çalýþan yapýlar.
             app.UseHttpsRedirection();
+
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200", "https://localhost:44387").AllowAnyHeader());
 
             app.UseRouting();
 

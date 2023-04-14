@@ -46,12 +46,12 @@ namespace Business.Concrete
                 return new ErrorDataResult<User>("Kullanıcı Bulunamadı.");
             }
 
-            if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, userToCheck.Data.PasswordHash, userToCheck.Data.PasswordSalt))
+            if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, userToCheck.PasswordHash, userToCheck.PasswordSalt))
             {
                 return new ErrorDataResult<User>("Şifre Hatalı.");
             }
 
-            return new SuccessDataResult<User>(userToCheck.Data, "Giriş Yapıldı.");
+            return new SuccessDataResult<User>(userToCheck, "Giriş Yapıldı.");
         }
 
         public IResult UserExists(string email)
