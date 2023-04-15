@@ -71,6 +71,8 @@ namespace WebAPI
             //Burasý Middleware Sýrayla çalýþan yapýlar.
             app.UseHttpsRedirection();
 
+            app.UseStaticFiles();
+
             app.UseCors(builder => builder.WithOrigins("http://localhost:4200", "https://localhost:44387").AllowAnyHeader());
 
             app.UseRouting();
