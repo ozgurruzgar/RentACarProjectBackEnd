@@ -24,10 +24,10 @@ namespace DataAccess.Concrete.EntityFramework
                              on car.ColorId equals c.ColorId
                              select new CarDetailDto
                              {
-                                 BrandId = car.BrandId,
-                                 BrandName = b.BrandName,
                                  CarId = car.CarId,
+                                 BrandId = b.BrandId,
                                  ColorId = c.ColorId,
+                                 BrandName = b.BrandName,
                                  ColorName = c.ColorName,
                                  ModelName = car.Model,
                                  DailyPrice = car.DailyPrice,
@@ -50,7 +50,18 @@ namespace DataAccess.Concrete.EntityFramework
                              join c in context.Colors
                              on car.ColorId equals c.ColorId
                              where b.BrandId == brandId
-                             select new CarDetailDto { CarId = car.CarId, BrandId = car.BrandId, BrandName = b.BrandName, ColorId = car.ColorId, ColorName = c.ColorName, ModelName = car.Model, Description = car.Description, DailyPrice = car.DailyPrice, ModelYear = car.ModelYear, ImagePath = (from ci in context.CarImages where car.CarId == ci.CarId select ci.ImagePath).FirstOrDefault() 
+                             select new CarDetailDto
+                             {
+                                 CarId = car.CarId,
+                                 BrandId = b.BrandId,
+                                 ColorId = c.ColorId,
+                                 BrandName = b.BrandName,
+                                 ColorName = c.ColorName,
+                                 ModelName = car.Model, 
+                                 Description = car.Description,
+                                 DailyPrice = car.DailyPrice,
+                                 ModelYear = car.ModelYear,
+                                 ImagePath = (from ci in context.CarImages where car.CarId == ci.CarId select ci.ImagePath).FirstOrDefault() 
                              };
                 return result.ToList();
             }
@@ -69,9 +80,9 @@ namespace DataAccess.Concrete.EntityFramework
                              select new CarDetailDto
                              {
                                  CarId = car.CarId,
-                                 BrandId = car.BrandId,
+                                 BrandId = b.BrandId,
+                                 ColorId = c.ColorId,
                                  BrandName = b.BrandName,
-                                 ColorId = car.ColorId,
                                  ColorName = c.ColorName,
                                  ModelName = car.Model,
                                  Description = car.Description,
@@ -96,9 +107,9 @@ namespace DataAccess.Concrete.EntityFramework
                              select new CarDetailDto
                              {
                                  CarId = car.CarId,
-                                 BrandId = car.BrandId,
+                                 BrandId = b.BrandId,
+                                 ColorId = c.ColorId,
                                  BrandName = b.BrandName,
-                                 ColorId = car.ColorId,
                                  ColorName = c.ColorName,
                                  ModelName = car.Model,
                                  Description = car.Description,
@@ -123,9 +134,9 @@ namespace DataAccess.Concrete.EntityFramework
                              select new CarDetailDto
                              {
                                  CarId = car.CarId,
-                                 BrandId = car.BrandId,
+                                 BrandId = b.BrandId,
+                                 ColorId = c.ColorId,
                                  BrandName = b.BrandName,
-                                 ColorId = car.ColorId,
                                  ColorName = c.ColorName,
                                  ModelName = car.Model,
                                  Description = car.Description,
