@@ -27,5 +27,8 @@ namespace Business.Contants
         public static string RentalListed="Kiralamalar Listelendi";
         public static string UserListed="Kullanıcılar Listelendi.";
         public static string CarImageAdded="Yeni Araç Resmi Eklendi.";
+        public static string PaymentAdded = "Yeni Ödeme Eklendi.";
+        public static string PaymentDeleted = "Ödeme Sistemden Silindi.";
+        public static string PaymentUpdated = "Ödeme Bilgileri Güncellendi.";
     }
 }
