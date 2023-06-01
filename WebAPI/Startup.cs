@@ -68,6 +68,8 @@ namespace WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.ConfigureCustomExceptionMiddleware();
+
             //Burasý Middleware Sýrayla çalýþan yapýlar.
             app.UseHttpsRedirection();
 

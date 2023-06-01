@@ -60,7 +60,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        private IResult CheckCarAvaible(int carId)
+        public IResult CheckCarAvaible(int carId)
         {
             IResult result = BusinessRules.Run(CheckIfCarAvaibleForRent(carId));
             if(result!=null)

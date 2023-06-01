@@ -10,8 +10,6 @@ namespace Business.ValidationRules.FluentValidation
     {
         public CarValidation()
         {
-            RuleFor(c => c.CarId).GreaterThan(0);
-            RuleFor(c => c.CarId).NotEmpty();
             RuleFor(c => c.BrandId).GreaterThan(0);
             RuleFor(c => c.BrandId).NotEmpty();
             RuleFor(c => c.ColorId).GreaterThan(0);
